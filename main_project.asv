@@ -55,16 +55,8 @@ figure;
 imshow(yellow_mask);
 
 yellow_props = regionprops(yellow_mask, 'Centroid');
-yellow_centroid = yellow_props(53).Centroid;
+yellow_centroid = yellow_props.Centroid;
 
-%%% Gray mask detection  %%%
-
-
-[detected_images3, gray_mask] = createMask_Gray(frameRightRect);
-figure;
-imshow(gray_mask);
-gray_props = regionprops(detected_images3, 'Centroid');
-gray_centroid = gray_props(92).Centroid
 
 % Convert to grayscale.
 I1gray = im2gray(frameLeftRect);
@@ -76,62 +68,56 @@ figure
 imshow(stereoAnaglyphImage)
 hold on;
 plot(yellow_centroid(1), yellow_centroid(2), 'yo', 'MarkerSize', 10, 'LineWidth', 2);
-plot(gray_centroid(1), gray_centroid(2), 'go', 'MarkerSize', 10, 'LineWidth', 2); % Mark gray part
-title('Detected Coordinate Origin and Holder Tip');
+title('Detected Yellow Object');
 
-pause(3);
 
-% for k = 1:length(blue_props)
-%%     Extract the coordinates of the blue tip
-%     blue_tip_coords = blue_props(k).Centroid;
-% 
-%%     Shift coordinates to make the yellow object's centroid the origin
-%     shifted_coords = blue_tip_coords - yellow_centroid;
-% 
-%%     Plot the shifted coordinates
-%     plot(shifted_coords(1) + yellow_centroid(1), shifted_coords(2) + yellow_centroid(2), 'r*', 'MarkerSize', 10);
-% 
-%%     Calculate and plot the orientation vector (example vector)
-%     x = shifted_coords(1) + yellow_centroid(1);
-%     y = shifted_coords(2) + yellow_centroid(2);
-%     x2 = x + 20;  % Example second point (to be replaced with actual method)
-%     y2 = y + 20;  % Example second point (to be replaced with actual method)
-% 
-%%     Plot the orientation vector
-%     quiver(x, y, x2 - x, y2 - y, 'r', 'LineWidth', 2);
-% end
+for k = 1:length(blue_props)
+    Extract the coordinates of the blue tip
+    blue_tip_coords = blue_props(k).Centroid;
+    
+    Shift coordinates to make the yellow object's centroid the origin
+    shifted_coords = blue_tip_coords - yellow_centroid;
+    
+    Plot the shifted coordinates
+    plot(shifted_coords(1) + yellow_centroid(1), shifted_coords(2) + yellow_centroid(2), 'r*', 'MarkerSize', 10);
+    
+    Calculate and plot the orientation vector (example vector)
+    x = shifted_coords(1) + yellow_centroid(1);
+    y = shifted_coords(2) + yellow_centroid(2);
+    x2 = x + 20;  % Example second point (to be replaced with actual method)
+    y2 = y + 20;  % Example second point (to be replaced with actual method)
+    
+    Plot the orientation vector
+    quiver(x, y, x2 - x, y2 - y, 'r', 'LineWidth', 2);
+end
 
-% hold off;
-% title('Needle Holder Tip Trajectory and Orientation with New Origin');
+hold off;
+title('Needle Holder Tip Trajectory and Orientation with New Origin');
 
 % 
-
-
-% Create the Disparity map
-[D,S] = istereo(I1gray,I2gray,[50 700], 3);
-
-% Display the disparity map
-figure;
-imagesc(D);
-colormap('jet');  % Use the 'jet' colormap for better visualization
-colorbar;  % Add a colorbar to visualize the range of disparities
-caxis([min(D(:)) max(D(:))]);  % Set the color axis limits based on the data range
-title('Disparity Map');
-
-pause(3);
-
-% Reconstruct 3D points
-points3D = reconstructScene(D, stereoParams);
-
-% Convert to meters and create a point cloud
-points3D = points3D ./ 1000;
-ptCloud = pointCloud(points3D, 'Color', frameRightRect);
-
-% Visualize the point cloud
-pcshow(ptCloud, 'VerticalAxis', 'Y', 'VerticalAxisDir', 'Down');
-xlabel('X (m)');
-ylabel('Y (m)');
-zlabel('Z (m)');
-title('3D Reconstruction of the Scene');
+% % Create the Disparity map
+% [D,S] = istereo(I1gray,I2gray,[50 700], 3);
+% 
+% % Display the disparity map
+% figure;
+% imagesc(D);
+% colormap('jet');  % Use the 'jet' colormap for better visualization
+% colorbar;  % Add a colorbar to visualize the range of disparities
+% caxis([min(D(:)) max(D(:))]);  % Set the color axis limits based on the data range
+% title('Disparity Map');
+% 
+% % Reconstruct 3D points
+% points3D = reconstructScene(D, stereoParams);
+% 
+% % Convert to meters and create a point cloud
+% points3D = points3D ./ 1000;
+% ptCloud = pointCloud(points3D, 'Color', frameRightRect);
+% 
+% % Visualize the point cloud
+% pcshow(ptCloud, 'VerticalAxis', 'Y', 'VerticalAxisDir', 'Down');
+% xlabel('X (m)');
+% ylabel('Y (m)');
+% zlabel('Z (m)');
+% title('3D Reconstruction of the Scene');
 
 
