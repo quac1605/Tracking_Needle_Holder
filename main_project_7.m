@@ -47,3 +47,13 @@ for k = 1:length(objectProperties)
 end
 title('Detected Blue Objects with Bounding Boxes and Centroids');
 hold off;
+
+
+imageFile = 'rectified_output/right/rectified_right_0.jpg'; % Replace with your image file
+I = imread(imageFile);
+
+%%% Blue mask detection  %%%
+
+[detected_images, colored_mask_image] = createMask(I);
+figure;
+imshow(colored_mask_image); 
