@@ -46,7 +46,7 @@ imshow(colored_mask_image1);
 %%% Yellow mask detection  %%%
 
 
-[detected_images2, colored_mask_image2] = createMask_Yellow(frameRightRect);
+[detected_images2, yellow_mask] = createMask_Yellow(frameRightRect);
 figure;
 imshow(colored_mask_image2);
 
