@@ -1,3 +1,5 @@
+clear 
+
 % Left Camera Intrinsics
 leftFocalLength = [1401.1400, 1401.1400];
 leftPrincipalPoint = [1150.3900, 670.6210];
@@ -28,8 +30,8 @@ rightCameraParams = cameraParameters('IntrinsicMatrix', [rightFocalLength(1), 0,
 stereoParams = stereoParameters(leftCameraParams, rightCameraParams, rotationOfCamera2, translationOfCamera2);
 
 
-I1 = imread("image_left_unrect_0.jpg");
-I2 = imread("image_right_unrect_0.jpg");
+I1 = imread("data/image_left_unrect/image_left_unrect_0.jpg");
+I2 = imread("data/image_right_unrect/image_right_unrect_0.jpg");
 
 
 [frameLeftRect, frameRightRect, reprojectionMatrix] = ...
