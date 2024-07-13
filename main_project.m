@@ -50,6 +50,10 @@ imshow(colored_mask_image1);
 figure;
 imshow(colored_mask_image2);
 
+yellow_props = regionprops(yellow_mask, 'Centroid');
+yellow_centroid = yellow_props.Centroid;
+
+
 % Convert to grayscale.
 I1gray = im2gray(frameLeftRect);
 I2gray = im2gray(frameRightRect);
