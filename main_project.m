@@ -27,6 +27,7 @@ rightCameraParams = cameraParameters('IntrinsicMatrix', [rightFocalLength(1), 0,
 % Create stereoParameters object
 stereoParams = stereoParameters(leftCameraParams, rightCameraParams, rotationOfCamera2, translationOfCamera2);
 
+
 I1 = imread("image_left_unrect_0.jpg");
 I2 = imread("image_right_unrect_0.jpg");
 
@@ -37,9 +38,17 @@ I2 = imread("image_right_unrect_0.jpg");
 %%% Blue mask detection  %%%
 
 
-[detected_images, colored_mask_image] = createMask(frameRightRect);
+[detected_images1, colored_mask_image1] = createMask(frameRightRect);
 figure;
-imshow(colored_mask_image); 
+imshow(colored_mask_image1); 
+
+
+%%% Yellow mask detection  %%%
+
+
+[detected_images2, colored_mask_image2] = createMask_Yellow(frameRightRect);
+figure;
+imshow(colored_mask_image2);
 
 % Convert to grayscale.
 I1gray = im2gray(frameLeftRect);
