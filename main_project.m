@@ -54,16 +54,23 @@ title("Composite Image (Red - Left Image, Cyan - Right Image)")
 
 
 % Create the Disparity map
-[D,S] = istereo(I1gray,I2gray,[50 700], 3);
-figure, imagesc(D);
+[D, S] = istereo(I1gray, I2gray, [50 700], 3);
 
- % Reconstruct 3D points
+% Display the disparity map
+figure;
+imagesc(D);
+colormap('jet');  % Use the 'jet' colormap for better visualization
+colorbar;  % Add a colorbar to visualize the range of disparities
+caxis([min(D(:)) max(D(:))]);  % Set the color axis limits based on the data range
+title('Disparity Map');
+
+% Reconstruct 3D points
 points3D = reconstructScene(D, stereoParams);
-    
+
 % Convert to meters and create a point cloud
 points3D = points3D ./ 1000;
 ptCloud = pointCloud(points3D, 'Color', frameRightRect);
-    
+
 % Visualize the point cloud
 pcshow(ptCloud, 'VerticalAxis', 'Y', 'VerticalAxisDir', 'Down');
 xlabel('X (m)');
