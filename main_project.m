@@ -113,7 +113,7 @@ pause(3);
 % Display the disparity map
 figure;
 waitfor(imagesc(D));
-waitfor(colormap('jet'));  % Use the 'jet' colormap for better visualization
+colormap('jet');  % Use the 'jet' colormap for better visualization
 colorbar;  % Add a colorbar to visualize the range of disparities
 caxis([min(D(:)) max(D(:))]);  % Set the color axis limits based on the data range
 title('Disparity Map');
