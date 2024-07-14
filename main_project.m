@@ -112,13 +112,12 @@ pause(3);
 
 % Display the disparity map
 figure;
-imagesc(D);
-colormap('jet');  % Use the 'jet' colormap for better visualization
-colorbar;  % Add a colorbar to visualize the range of disparities
-caxis([min(D(:)) max(D(:))]);  % Set the color axis limits based on the data range
-title('Disparity Map');
+waitfor(imagesc(D));
+waitfor(colormap('jet'));  % Use the 'jet' colormap for better visualization
+waitfor(colorbar);  % Add a colorbar to visualize the range of disparities
+waitfor(caxis([min(D(:)) max(D(:))]));  % Set the color axis limits based on the data range
+waitfor(title('Disparity Map'));
 
-pause(3);
 
 % Reconstruct 3D points
 points3D = reconstructScene(D, stereoParams);
