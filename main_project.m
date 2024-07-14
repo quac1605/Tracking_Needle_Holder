@@ -82,25 +82,25 @@ title('Detected Coordinate Origin and Holder Tip');
 pause(3);
 
 % for k = 1:length(blue_props)
-%%     Extract the coordinates of the blue tip
+% %     Extract the coordinates of the blue tip
 %     blue_tip_coords = blue_props(k).Centroid;
 % 
-%%     Shift coordinates to make the yellow object's centroid the origin
+% %     Shift coordinates to make the yellow object's centroid the origin
 %     shifted_coords = blue_tip_coords - yellow_centroid;
 % 
-%%     Plot the shifted coordinates
+% %     Plot the shifted coordinates
 %     plot(shifted_coords(1) + yellow_centroid(1), shifted_coords(2) + yellow_centroid(2), 'r*', 'MarkerSize', 10);
 % 
-%%     Calculate and plot the orientation vector (example vector)
+% %     Calculate and plot the orientation vector (example vector)
 %     x = shifted_coords(1) + yellow_centroid(1);
 %     y = shifted_coords(2) + yellow_centroid(2);
 %     x2 = x + 20;  % Example second point (to be replaced with actual method)
 %     y2 = y + 20;  % Example second point (to be replaced with actual method)
 % 
-%%     Plot the orientation vector
+% %     Plot the orientation vector
 %     quiver(x, y, x2 - x, y2 - y, 'r', 'LineWidth', 2);
 % end
-
+% 
 % hold off;
 % title('Needle Holder Tip Trajectory and Orientation with New Origin');
 
@@ -113,10 +113,10 @@ pause(3);
 % Display the disparity map
 figure;
 waitfor(imagesc(D));
-waitfor(colormap('jet'));  % Use the 'jet' colormap for better visualization
-waitfor(colorbar);  % Add a colorbar to visualize the range of disparities
-waitfor(caxis([min(D(:)) max(D(:))]));  % Set the color axis limits based on the data range
-waitfor(title('Disparity Map'));
+colormap('jet');  % Use the 'jet' colormap for better visualization
+colorbar;  % Add a colorbar to visualize the range of disparities
+caxis([min(D(:)) max(D(:))]);  % Set the color axis limits based on the data range
+title('Disparity Map');
 
 
 % Reconstruct 3D points
