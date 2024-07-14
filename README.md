@@ -12,3 +12,4 @@ coordinate origin.
 the orientation vector of the rod at each position.
 
 The main project file is the "main_project.m"
+Conductor: Nhat Quang Nguyen, 
